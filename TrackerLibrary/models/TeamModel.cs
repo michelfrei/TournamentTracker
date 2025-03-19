@@ -12,6 +12,10 @@ namespace TrackerLibrary.models
     public class TeamModel
     {
         /// <summary>
+        /// Representes the unique ID of an team
+        /// </summary>
+        public int Id { get; set; }
+        /// <summary>
         /// Representes the members of the team
         /// </summary>
         public List<PersonModel> TeamMembers { get; set; } = new List<PersonModel>(); //criar a variavel e ja inicia ela

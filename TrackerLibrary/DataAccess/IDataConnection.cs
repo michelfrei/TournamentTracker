@@ -12,7 +12,10 @@ namespace TrackerLibrary.DataAccess
         // essa interface cria os "contratos" e especificam quais metodos, propriedades e objetos devem ser disponibilizados de forma
         // publica para todos que queiram usar (dentro do software obvio)
         PrizeModel CreatePrize(PrizeModel model);
-
         PersonModel CreatePerson(PersonModel model);
+        void CreateTournament(TournamentModel model);
+        List<PersonModel> GetPerson_All();
+        List<TeamModel> GetTeam_All();
+        TeamModel CreateTeam(TeamModel model);
     }
 }

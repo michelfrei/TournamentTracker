@@ -15,16 +15,14 @@ namespace TrackerUI
 {
     public partial class CreatePrizeForm : Form
     {
-        public CreatePrizeForm()
+        IPrizeRequester callingForm;
+        public CreatePrizeForm(IPrizeRequester caller)
         {
             InitializeComponent();
+
+            callingForm = caller; //cria uma variavel em nivel de classe, que guarda qualquer cois que for passada para o construtor "IPrizeRequester caller"
+            //esse valor vai ser interessante para ser usado fora do escopo dessa classe no caso vai ser usada pelo botão que vai ser usada pelo createtournamentform
         }
-
-        private void createPrizeButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private bool ValidadeForm()
         {
             bool output = true;
@@ -74,14 +72,14 @@ namespace TrackerUI
         {
             if (ValidadeForm())
             {
+                //PrizeModel model = new PrizeModel(placeNameValue.Text, placeNumberValue.Text, prizeAmountValue.Text, prizePercentageValue.Text);
                 PrizeModel model = new PrizeModel(placeNameValue.Text, placeNumberValue.Text, prizeAmountValue.Text, prizePercentageValue.Text);
 
                 GlobalConfig.Connection.CreatePrize(model);
-                
-                placeNameValue.Text = "";
-                placeNumberValue.Text = "";
-                prizeAmountValue.Text = "0";
-                prizePercentageValue.Text = "0";
+
+                callingForm.PrizeComplete(model); // isso aqui é de suma importancia para o createtournamentform -> no botão que chama "create prize"
+
+                this.Close();
             }
             else 
             {
